@@ -2,7 +2,7 @@
 
 namespace ConsoleTest
 {
-	internal class Program
+	internal class ProgramMain
 	{
 		static readonly string BaseDir = @"C:\WTG\IL\WI00793348_CargoVisibilityAPI_SetupS2ST\01_CertificateSigningRequest";
 
