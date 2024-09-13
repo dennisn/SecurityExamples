@@ -6,9 +6,9 @@ namespace ConsoleTest
 	{
 		static readonly string BaseDir = @"C:\WTG\IL\WI00793348_CargoVisibilityAPI_SetupS2ST\01_CertificateSigningRequest";
 
-		static readonly string CertificateFile = $"{BaseDir}/WTG,ILS,CargoVisibilityAPI - f30a1049-9790-4653-bbac-79c7a040278c.cer";
+		static readonly string CertificateFile = $"{BaseDir}/WTG_ILS_CargoVisibilityAPI.cer";
 		static readonly string PublicKeyFile = $"{BaseDir}/public_key.pem";
-		static readonly string PrivateKeyFile = $"{BaseDir}/private.key";
+		static readonly string PrivateKeyFile = $"{BaseDir}/private_key.pem";
 
 		static readonly string TestDataFile = $"{BaseDir}/TestData_ZIMUFLX09069253.json";
 
