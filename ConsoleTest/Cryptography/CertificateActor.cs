@@ -57,13 +57,17 @@ public class CertificateActor : IActor
 
     public byte[] EncryptData(byte[] data)
     {
-        return RsaPublicKey.Encrypt(data, RSAEncryptionPadding.Pkcs1);
+		using var inStream = new MemoryStream(data);
+		using var outStream = new MemoryStream(data.Length);
+		
+		RsaPublicKey.EncryptDataWithIntermediateAesKey(inStream, outStream);
+		return outStream.ToArray();
     }
 
     public byte[] DecryptData(byte[] data)
     {
-        return RsaPublicKey.Decrypt(data, RSAEncryptionPadding.Pkcs1);
-    }
+		throw new NotImplementedException("Public key shouldn't be used to decrypt message encrypted by private key");
+	}
 
     public byte[] SignData(byte[] data)
     {

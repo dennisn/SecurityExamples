@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ConsoleTest.Cryptography;
+using System.Text;
 
 namespace ConsoleTest
 {
@@ -52,7 +53,32 @@ namespace ConsoleTest
 						var rawData = File.ReadAllBytes(TestDataFile);
 						var encryptedData = certificateActor.EncryptData(rawData);
 						var decryptedData = privateKeyActor.DecryptData(encryptedData);
+
+						var lineSeparator = new string('-', 80);
+
+						Console.WriteLine(Encoding.UTF8.GetString(rawData));
+						Console.WriteLine(lineSeparator);
 						Console.WriteLine(Encoding.UTF8.GetString(decryptedData));
+						Console.WriteLine(lineSeparator);
+						Console.WriteLine("Data equals: {0}", Enumerable.SequenceEqual(rawData, decryptedData));
+					}
+					return;
+				case "encrypt_by_key":
+					{
+						var certificateActor = new CertificateActor(CertificateFile);
+						var privateKeyActor = new RsaKeyActor(PrivateKeyFile);
+
+						var rawData = File.ReadAllBytes(TestDataFile);
+						var encryptedData = privateKeyActor.EncryptData(rawData);
+						var decryptedData = certificateActor.DecryptData(encryptedData);
+
+						var lineSeparator = new string('-', 80);
+
+						Console.WriteLine(Encoding.UTF8.GetString(rawData));
+						Console.WriteLine(lineSeparator);
+						Console.WriteLine(Encoding.UTF8.GetString(decryptedData));
+						Console.WriteLine(lineSeparator);
+						Console.WriteLine("Data equals: {0}", Enumerable.SequenceEqual(rawData, decryptedData));
 					}
 					return;
 				case "sign_by_private":

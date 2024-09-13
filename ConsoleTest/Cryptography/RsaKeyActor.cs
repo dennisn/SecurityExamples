@@ -24,17 +24,21 @@ public class RsaKeyActor
         Console.WriteLine("Key to XML String: {0}.", RsaKey.ToXmlString(false));
     }
 
-    public byte[] EncryptData(byte[] data)
-    {
-        return RsaKey.Encrypt(data, RSAEncryptionPadding.Pkcs1);
-    }
+	public byte[] EncryptData(byte[] data)
+	{
+		throw new NotImplementedException("Private key should not be used to encrypt message. Use SignData instead");
+	}
 
-    public byte[] DecryptData(byte[] data)
-    {
-        return RsaKey.Decrypt(data, RSAEncryptionPadding.Pkcs1);
-    }
+	public byte[] DecryptData(byte[] data)
+	{
+		using var inStream = new MemoryStream(data);
+		using var outStream = new MemoryStream(data.Length);
 
-    public byte[] SignData(byte[] data)
+		RsaKey.DecryptDataWithIntermediateAesKey(inStream, outStream);
+		return outStream.ToArray();
+	}
+
+	public byte[] SignData(byte[] data)
     {
         return RsaKey.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
     }
